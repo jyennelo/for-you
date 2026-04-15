@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+}
+
+/* Card */
+.card {
+  text-align: center;
+  background: rgba(255,255,255,0.15);
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  max-width: 350px;
+  z-index: 2;
+}
+
+/* Image */
+.card img {
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+/* Typing text */
+#text {
+  font-size: 20px;
+  min-height: 60px;
+}
+
+/* Button */
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background: white;
+  color: #ff4d6d;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ffe6ea;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  bottom: -10px;
+  color: rgba(255,255,255,0.7);
+  font-size: 20px;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1.5);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Music -->
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio>
+
+<!-- Floating Hearts Container -->
+<div id="hearts"></div>
+
+<!-- Main Card -->
+<div class="card">
+  
+  <!-- Replace this with your photo -->
+  <img src="files/1.JPEG" alt="Her Photo">
+
+  <h2>Hey Beautiful! 👀 </h2>
+  <p id="text"></p>
+
+  <button onclick="startMessage()">Tap Me 💌</button>
+</div>
+
+<script>
+// Typing effect message
+const message = "Just a reminder—you’re beautiful. And I hope your day is as amazing as you are! ✨";
+
+let i = 0;
+function startMessage() {
+  document.getElementById("text").innerHTML = "";
+  i = 0;
+  typeEffect();
+}
+
+function typeEffect() {
+  if (i < message.length) {
+    document.getElementById("text").innerHTML += message.charAt(i);
+    i++;
+    setTimeout(typeEffect, 50);
+  }
+}
+
+// Floating hearts generator
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}
+
+// Generate hearts continuously
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
